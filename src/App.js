@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import AddTask from './components/AddTask'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
 
@@ -25,6 +26,24 @@ const App = () => {
     },
   ])
 
+  const addTask = (task)=> {
+    //test function
+    console.log(task);
+
+    // functionality for adding the input task to task array
+
+    // just the every next number below depending on current array length - can be bad if we are deleting the tasks
+    //const id = tasks.length ++
+
+    //more complex id without other packages
+    const id = Math.floor(Math.random()* 10000) + 1
+    // test ID
+    console.log(id);
+
+    const newTask = {id, ...task}
+    setTasks([...tasks, newTask])
+  }
+
   // Delete Task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id))
@@ -39,6 +58,7 @@ const App = () => {
   return (
     <div className="container">
       <Header />
+      <AddTask onAdd={addTask} />
 
       { tasks.length > 0 ?
         (<Tasks tasks={tasks} onDelete={deleteTask} onToggle = {toggleReminder} />)
